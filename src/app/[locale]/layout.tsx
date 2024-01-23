@@ -58,7 +58,7 @@ export default function RootLayout({
         <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
         <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
         <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
-        <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+        {/* <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" /> */}
       </head>
       <body
         className={`${jost.variable} ${poppins.variable} ${open_sans.variable}`}
@@ -69,7 +69,7 @@ export default function RootLayout({
         <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+        {/* <script src="/vendor/swiper/swiper-bundle.min.js"></script> */}
         <script src="/vendor/waypoints/noframework.waypoints.js"></script>
 
         <script src="/js/main.js"></script>

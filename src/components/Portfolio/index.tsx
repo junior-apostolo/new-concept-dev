@@ -1,38 +1,32 @@
-import { getAccessToken } from "@/api/imgurAuth"
+import { Carousel } from "../Carousel";
 
 type Images = {
-    id: string,
-    title: string,
-    description: string,
-    link: string
-}
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+};
 
-async function getImages(): Promise<Images[]>{
-    const accessToken = await getAccessToken() 
-    const response = await fetch("https://api.imgur.com/3/account/me/images", {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${accessToken}`
-        }
-    })
+const myHeaders = new Headers();
+myHeaders.append("Authorization", "Client-ID accdfd12b9814d5");
 
-    if(!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-    }
+async function getImages(): Promise<Images[]> {
+  const response = await fetch("https://api.imgur.com/3/album/9Z64ZD9/images", {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  });
 
-    const data = await response.json()
-    return data.data;
+  const data = await response.json();
+  return data.data;
 }
 
 export async function Portfolio() {
-    const images = await getImages();
+  const images = await getImages();
 
-    console.log("Images",images)
-    return(
-        <section>
-            {images.map((image)=> (
-                <h1>{image.title}</h1>
-            ))}
-        </section>
-    )
+  return (
+    <section className="">
+      <Carousel items={images} />
+    </section>
+  );
 }

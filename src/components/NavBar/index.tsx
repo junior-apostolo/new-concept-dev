@@ -12,7 +12,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div id="header" className="fixed-top">
+    <div className="fixed top-0 right-0 left-0">
       <Popover className="container text-white flex items-center justify-between py-3 md:gap-3">
         <h1 className="font-medium m-0">
           <Link href="#">

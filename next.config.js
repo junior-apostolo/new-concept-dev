@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const withNextIntl = require("next-intl/plugin")();
-const nextConfig = {
+const nextConfig = {};
+
+// https://i.imgur.com/Rqubs21.jpg)
+
+module.exports = withNextIntl({
   experimental: {
     appDir: true,
   },
@@ -10,15 +14,11 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '',
-        port: '',
-        pathname: ''
-      }
-    ]
-  }
-};
-
-module.exports = withNextIntl({
-  nextConfig
+        protocol: "https",
+        hostname: "i.imgur.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 });
