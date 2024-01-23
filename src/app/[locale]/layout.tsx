@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Jost, Open_Sans, Poppins } from "next/font/google";
-import { unstable_setRequestLocale } from "next-intl/server";
+// import { unstable_setRequestLocale } from "next-intl/server";
 import "./globals.css";
+import {useLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
 
 const jost = Jost({
   weight: ["300", "400", "500", "600", "700"],
@@ -29,11 +31,11 @@ const poppins = Poppins({
 //   return languages;
 // }
 
-const locales = ["en-US", "pt-BR"];
+// const locales = ["en-US", "pt-BR"];
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
+// export function generateStaticParams() {
+//   return locales.map((locale) => ({ locale }));
+// }
 
 export const metadata: Metadata = {
   title: "New Concept Exhibition",
@@ -47,8 +49,14 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const locale = useLocale();
+ 
+  // Show a 404 error if the user requests an unknown locale
+  if (params.locale !== locale) {
+    notFound();
+  }
 
-  unstable_setRequestLocale(params.locale)
+  // unstable_setRequestLocale(params.locale)
   return (
     <html lang={params.locale}>
       <head>
