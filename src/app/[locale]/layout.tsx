@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Open_Sans, Poppins } from "next/font/google";
+import { unstable_setRequestLocale } from "next-intl/server";
 import "./globals.css";
 
 const jost = Jost({
@@ -28,10 +29,10 @@ const poppins = Poppins({
 //   return languages;
 // }
 
-const locales = ['en-US', 'pt-BR'];
- 
+const locales = ["en-US", "pt-BR"];
+
 export function generateStaticParams() {
-  return locales.map((locale) => ({locale}));
+  return locales.map((locale) => ({ locale }));
 }
 
 export const metadata: Metadata = {
@@ -46,6 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+
+  unstable_setRequestLocale(params.locale)
   return (
     <html lang={params.locale}>
       <head>
