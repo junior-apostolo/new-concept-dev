@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/NavBar";
 import { Portfolio } from "@/components/Portfolio";
 import { Form } from "@/components/Form";
+import { Contact } from "@/components/Contact";
 
 export default function Home() {
   const t = useTranslations("Header");
@@ -14,8 +15,8 @@ export default function Home() {
       <Hero />
       <div className="container">
         <h1>{t("title")}</h1>
-        <Form />
         <Portfolio />
+        <Contact/>
       </div>
       <Footer />
     </div>
