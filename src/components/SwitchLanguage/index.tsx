@@ -25,7 +25,7 @@ export function SwitchLanguage() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-          <Globe  className="navbarLi"/>
+        <Globe className="navbarLi" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="md:w-auto lg:w-40">
         <DropdownMenuLabel>Idiomas</DropdownMenuLabel>

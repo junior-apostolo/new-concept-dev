@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Jost, Open_Sans, Poppins } from "next/font/google";
 // import { unstable_setRequestLocale } from "next-intl/server";
 import "./globals.css";
-import {useLocale} from 'next-intl';
-import {notFound} from 'next/navigation';
+import { NextIntlClientProvider, useLocale, useMessages } from "next-intl";
+import { notFound } from "next/navigation";
 
 const jost = Jost({
   weight: ["300", "400", "500", "600", "700"],
@@ -26,16 +26,11 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-// export async function generateStaticParams() {
-//   const languages = i18n.locales.map((lang) => ({ lang }));
-//   return languages;
-// }
+const locales = ["en-US", "pt-BR"];
 
-// const locales = ["en-US", "pt-BR"];
-
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }));
-// }
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export const metadata: Metadata = {
   title: "New Concept Exhibition",
@@ -50,8 +45,8 @@ export default function RootLayout({
   params: { locale: string };
 }) {
   const locale = useLocale();
- 
-  // Show a 404 error if the user requests an unknown locale
+  const messages = useMessages();
+
   if (params.locale !== locale) {
     notFound();
   }
@@ -74,7 +69,7 @@ export default function RootLayout({
       <body
         className={`${jost.variable} ${poppins.variable} ${open_sans.variable}`}
       >
-        {children}
+        <NextIntlClientProvider locale={params.locale} messages={messages}>{children}</NextIntlClientProvider>
 
         <script src="/vendor/aos/aos.js"></script>
         <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

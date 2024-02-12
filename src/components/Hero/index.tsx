@@ -1,7 +1,11 @@
 import Image from "next/image";
+import {useTranslations} from 'next-intl'
+
 import "./styles.css";
 
 export function Hero() {
+  const t = useTranslations("Hero")
+
   return (
     <section id="hero" className="d-flex align-items-center">
       <div className="container">
@@ -10,9 +14,9 @@ export function Hero() {
             className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
             data-aos-delay="200"
           >
-            <h1 className="title">Better Solutions For Your Business</h1>
+            <h1 className="title">{t("title")}</h1>
             <h2 className="subTitle">
-              We are a talented team that helps you realize your goal
+            {t("subTitle")}
             </h2>
           </div>
           <div

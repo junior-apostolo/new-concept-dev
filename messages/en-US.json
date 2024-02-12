@@ -1,5 +1,13 @@
 {
-    "Header": {
-      "title": "Hello world!"
+    "NavBar": {
+      "home": "home",
+      "about": "about",
+      "services": "services",
+      "portfolio": "portfolio",
+      "contact": "contact"
+    },
+    "Hero": {
+      "title":"Better Solutions For Your Business",
+      "subTitle": "We are a talented team that helps you realize your goal"
     }
 }

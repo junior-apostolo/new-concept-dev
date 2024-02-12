@@ -1,5 +1,4 @@
 "use client";
-
 import { SwitchLanguage } from "../SwitchLanguage";
 import Image from "next/image";
 import { Menu, X as CloseIcon } from "lucide-react";
@@ -7,9 +6,24 @@ import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { Link as LinkSwitch, usePathname, useRouter } from "@/navigation";
+import {useTranslations} from 'next-intl'
 
-export function Navbar() {
+type NavBarProps = {
+  homeText: string,
+  aboutText: string,
+  servicesText: string,
+  portfolioText: string,
+  contactText: string
+}
+
+type NavBarObject = {
+  contentNavBar: NavBarProps[]
+}
+
+
+export function Navbar({}) {
   const pathname = usePathname();
+  const t = useTranslations("NavBar")
 
   return (
     <div className="fixed top-0 right-0 left-0 z-10 bg-[#37517e] bg-opacity-100">
@@ -30,19 +44,19 @@ export function Navbar() {
             {/* <div className="hover:text-[#47b2e4] duration-300"></div> */}
             <ul className="hidden md:flex items-center justify-center lg:gap-6 md:gap-2 sm:gap-2 uppercase m-0 p-0">
               <li className="navbarLi">
-                <Link href="#home">Home</Link>
+                <Link href="#home">{t("home")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">About</Link>
+                <Link href="#home">{t("about")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">Services</Link>
+                <Link href="#home">{t("services")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">Portfolio</Link>
+                <Link href="#home">{t("portfolio")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">Contact</Link>
+                <Link href="#home">{t("contact")}</Link>
               </li>
             </ul>
           </nav>
@@ -150,47 +164,5 @@ export function Navbar() {
         </div>
       </Popover>
     </div>
-    // <header
-    //   id="header"
-    //   className="w-full h-20 lg:h-28 lg:bg-transparent text-[#37517e] md:text-white fixed-top"
-    // >
-    //   <nav className="container flex justify-between items-center w-[92%] py-3">
-    //     <h1 className="text-2xl uppercase font-bold">
-    //       {/* <a href="">
-    //         <Image alt="logo NewConceptExhibition" src="" />
-    //       </a> */}
-    //       NewConceptExhibition
-    //     </h1>
-
-    //     <div className="md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5 md:bg-[#37517e] bg-slate-50 ">
-    //       <ul className="flex md:hidden lg:inline-flex md:flex-row flex-col lg:items-center gap-6 md:gap-[4vw] uppercase text-sm font-semibold m-0">
-    //         <li className="">
-    //           <SwitchLanguage />
-    //         </li>
-    //         <li className="navbarLi">
-    //           <Link href="#">Home</Link>
-    //         </li>
-    //         <li className="navbarLi">
-    //           <Link href="#">About</Link>
-    //         </li>
-    //         <li className="navbarLi">
-    //           <Link href="#">Services</Link>
-    //         </li>
-    //         <li className="navbarLi">
-    //           <Link href="#">Portfolio</Link>
-    //         </li>
-    //         <li className="navbarLi">
-    //           <Link href="#">Contact</Link>
-    //         </li>
-    //       </ul>
-    //     </div>
-
-    //     <div className="inline-flex lg:hidden">
-    //       <Menu className="text-3xl cursor-pointer lg:hidden" />
-    //     </div>
-    //   </nav>
-
-    //   {/* <div className="max-w-screen-2xl h-full mx-auto px-4 flex items-center justify-between"></div> */}
-    // </header>
   );
 }

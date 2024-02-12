@@ -1,5 +1,13 @@
 {
-    "Header": {
-      "title": "Ola Mundo!!"
-    }
+  "NavBar": {
+    "home": "home",
+    "about": "sobre",
+    "services": "serviços",
+    "portfolio": "portfolio",
+    "contact": "contato"
+  },
+  "Hero": {
+    "title":"Melhores soluções para o seu negócio",
+    "subTitle": "Somos uma equipe talentosa que ajuda você a atingir seu objetivo"
+  }
 }
