@@ -191,6 +191,7 @@ export function Form() {
             type="number"
             className="border border-zinc-200 shadow-sm rounded h-10"
             placeholder="Event Name"
+            min={0}
             {...register("quantityChair")}
           />
         </div>
@@ -200,6 +201,7 @@ export function Form() {
             type="number"
             className="border border-zinc-200 shadow-sm rounded h-10"
             placeholder="Event Name"
+            min={0}
             {...register("tableQuantity")}
           />
         </div>
@@ -217,6 +219,7 @@ export function Form() {
             type="number"
             className="border border-zinc-200 shadow-sm rounded h-10"
             placeholder="Event Name"
+            min={0}
             {...register("quantityTV")}
           />
         </div>

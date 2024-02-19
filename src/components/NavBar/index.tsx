@@ -8,18 +8,6 @@ import { Fragment } from "react";
 import { Link as LinkSwitch, usePathname, useRouter } from "@/navigation";
 import {useTranslations} from 'next-intl'
 
-type NavBarProps = {
-  homeText: string,
-  aboutText: string,
-  servicesText: string,
-  portfolioText: string,
-  contactText: string
-}
-
-type NavBarObject = {
-  contentNavBar: NavBarProps[]
-}
-
 
 export function Navbar({}) {
   const pathname = usePathname();
