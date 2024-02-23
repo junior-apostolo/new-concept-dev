@@ -6,24 +6,24 @@ import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { Link as LinkSwitch, usePathname, useRouter } from "@/navigation";
-import {useTranslations} from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 
-export function Navbar({}) {
+export function Navbar({ }) {
   const pathname = usePathname();
   const t = useTranslations("NavBar")
 
   return (
     <div className="fixed top-0 right-0 left-0 z-10 bg-[#37517e] bg-opacity-100">
       <Popover className="container text-white flex items-center justify-between py-3 md:gap-3">
-        <h1 className="font-medium m-0">
+        <h1 className="font-medium m-0 uppercase md:text-2xl lg:text-3xl">
           <Link href="#">
             {/* <Image
-            alt="logo NewConceptExhibition"
-            src="/img/logo-new-concept-white.png"
-            width={30}
-            height={30}
-          /> */}
+              alt="logo NewConceptExhibition"
+              src="/img/favicon-16x16.png"
+              width={30}
+              height={30}
+            /> */}
             NewConceptExhibiton
           </Link>
         </h1>

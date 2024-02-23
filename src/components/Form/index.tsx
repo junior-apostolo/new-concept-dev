@@ -4,10 +4,12 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { map, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
+
 
 const budgetFormSchema = z.object({
   name: z
@@ -29,19 +31,19 @@ const budgetFormSchema = z.object({
     .toLowerCase(),
   contact: z
     .string()
-    .min(3, "Numero de telefone é obrigatório")
-    .regex(phoneRegex, "Numero Invalido!"),
-  eventName: z.string().min(3),
+    .min(3, "Número de telefone é obrigatório")
+    .regex(phoneRegex, "Número Invalido!"),
+  eventName: z.string().min(3, "Nome do evento é obrigatório"),
   dateEvent: z.coerce.date(),
-  eventPlace: z.string().min(3),
-  standSize: z.string(),
+  eventPlace: z.string().min(3, "Local do evento é obrigatório"),
+  standSize: z.string().min(3, "Informação obrigatória"),
   budget: z.string(),
-  typeFloor: z.string(),
+  typeFloor: z.enum(["vinyl", "carpete"]),
   quantityCounter: z.coerce.number().nonnegative(),
   quantityChair: z.coerce.number().nonnegative(),
   tableQuantity: z.coerce.number().nonnegative(),
   quantityTV: z.coerce.number().nonnegative(),
-  isNeededGraph: z.string(),
+  isNeededGraph: z.enum(["yes", "no"]),
   images: z.instanceof(FileList)
 });
 
@@ -81,6 +83,7 @@ export function Form() {
 
   async function handleSendBudget(data: BudgetFormSchema) {
     try {
+      console.log("Objeto",data)
       const images = await convertToBase64(data.images)
 
     } catch (err) {
@@ -207,11 +210,17 @@ export function Form() {
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="typeFloor">Type Floor</label>
-          <Input
-            className="border border-zinc-200 shadow-sm rounded h-10"
-            placeholder="Event Name"
-            {...register("typeFloor")}
-          />
+          <Select {...register("typeFloor")} >
+              <SelectTrigger className="border border-zinc-200 shadow-sm rounded h-10">
+                <SelectValue placeholder="Select a option"/>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="vinyl">Vinyl</SelectItem>
+                  <SelectItem value="carpete">Carpete</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="quantityTV">Quantity TV</label>
@@ -225,11 +234,17 @@ export function Form() {
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="isNeededGraph">Is Needed Graph</label>
-          <Input
-            className="border border-zinc-200 shadow-sm rounded h-10"
-            placeholder="Event Name"
-            {...register("isNeededGraph")}
-          />
+            <Select>
+              <SelectTrigger {...register("isNeededGraph")} className="border border-zinc-200 shadow-sm rounded h-10">
+                <SelectValue placeholder="Select a option"/>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="images">Images</label>

@@ -4,7 +4,7 @@ import { Navbar } from "@/components/NavBar";
 import { Portfolio } from "@/components/Portfolio";
 import { Contact } from "@/components/Contact";
 
-export default function Home() {
+export default function Home({}) {
   return (
     <>
       <Navbar />
