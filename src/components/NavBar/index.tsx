@@ -14,10 +14,10 @@ export function Navbar({ }) {
   const t = useTranslations("NavBar")
 
   return (
-    <div className="fixed top-0 right-0 left-0 z-10 bg-[#37517e] bg-opacity-100">
+    <div className="fixed top-0 right-0 left-0 z-10 bg-[#37517e] bg-opacity-90">
       <Popover className="container text-white flex items-center justify-between py-3 md:gap-3">
         <h1 className="font-medium m-0 uppercase md:text-2xl lg:text-3xl">
-          <Link href="#">
+          <Link className="text-white" href="#">
             {/* <Image
               alt="logo NewConceptExhibition"
               src="/img/favicon-16x16.png"
@@ -32,19 +32,19 @@ export function Navbar({ }) {
             {/* <div className="hover:text-[#47b2e4] duration-300"></div> */}
             <ul className="hidden md:flex items-center justify-center lg:gap-6 md:gap-2 sm:gap-2 uppercase m-0 p-0">
               <li className="navbarLi">
-                <Link href="#home">{t("home")}</Link>
+                <Link className="text-white" href="#home">{t("home")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">{t("about")}</Link>
+                <Link className="text-white" href="#home">{t("about")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">{t("services")}</Link>
+                <Link className="text-white" href="#home">{t("services")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">{t("portfolio")}</Link>
+                <Link className="text-white" href="#home">{t("portfolio")}</Link>
               </li>
               <li className="navbarLi">
-                <Link href="#home">{t("contact")}</Link>
+                <Link className="text-white" href="#home">{t("contact")}</Link>
               </li>
             </ul>
           </nav>

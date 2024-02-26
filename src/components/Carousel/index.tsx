@@ -63,7 +63,7 @@ export function Carousel({ items }: CarouselProps) {
       >
         {items.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="group relative h-[20rem] border-slate-50 rounded-2xl overflow-hidden ">
+            <div className="group relative h-[22rem] border-slate-50 rounded-2xl overflow-hidden ">
               <Image
                 className="h-full object-cover rounded-xl"
                 src={item.link}

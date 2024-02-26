@@ -4,12 +4,12 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { map, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { useState } from "react";
+import { Select } from "../Select";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
-
 
 const budgetFormSchema = z.object({
   name: z
@@ -31,20 +31,22 @@ const budgetFormSchema = z.object({
     .toLowerCase(),
   contact: z
     .string()
-    .min(3, "Número de telefone é obrigatório")
-    .regex(phoneRegex, "Número Invalido!"),
-  eventName: z.string().min(3, "Nome do evento é obrigatório"),
-  dateEvent: z.coerce.date(),
-  eventPlace: z.string().min(3, "Local do evento é obrigatório"),
-  standSize: z.string().min(3, "Informação obrigatória"),
+    .min(3, "Numero de telefone é obrigatório")
+    .regex(phoneRegex, "Numero Invalido!"),
+  eventName: z.string().min(3),
+  dateEvent: z.coerce.date().refine((data) => data > new Date(), {
+    message: "Selecione uma data valida",
+  }),
+  eventPlace: z.string().min(3),
+  standSize: z.string(),
   budget: z.string(),
-  typeFloor: z.enum(["vinyl", "carpete"]),
   quantityCounter: z.coerce.number().nonnegative(),
   quantityChair: z.coerce.number().nonnegative(),
   tableQuantity: z.coerce.number().nonnegative(),
   quantityTV: z.coerce.number().nonnegative(),
-  isNeededGraph: z.enum(["yes", "no"]),
-  images: z.instanceof(FileList)
+  typeFloor: z.string().optional(),
+  isNeededGraph: z.enum(["yes", "no"]).optional(),
+  images: z.instanceof(FileList),
 });
 
 type BudgetFormSchema = z.infer<typeof budgetFormSchema>;
@@ -54,42 +56,65 @@ export function Form() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<BudgetFormSchema>({
     resolver: zodResolver(budgetFormSchema),
   });
 
-  const convertToBase64 = async (images: FileList) => {
-    let imagesBase64: { name: string; base64: string | ArrayBuffer | null; }[] = [];
+  // const [selectedValue, setSelectedValue] = useState("");
 
-    await Promise.all(Array.from(images).map((file) => {
-      return new Promise<void>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          imagesBase64.push({
-            name: file.name,
-            base64: reader.result,
-          });
-          resolve();
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }));
+  const convertToBase64 = async (images: FileList) => {
+    let imagesBase64: { name: string; base64: string | ArrayBuffer | null }[] =
+      [];
+
+    await Promise.all(
+      Array.from(images).map((file) => {
+        return new Promise<void>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            imagesBase64.push({
+              name: file.name,
+              base64: reader.result,
+            });
+            resolve();
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      })
+    );
 
     return imagesBase64;
-  }
+  };
 
-  console.log(errors)
+  console.log(errors);
 
   async function handleSendBudget(data: BudgetFormSchema) {
     try {
-      console.log("Objeto",data)
-      const images = await convertToBase64(data.images)
-
+      console.log("Objeto", data);
+      console.log("Valor ao vivo", watch("typeFloor"));
+      const images = await convertToBase64(data.images);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
+
+  const options = [
+    { value: "", label: "Select..." },
+    { value: "vinyl", label: "Vinyl" },
+    { value: "carpet", label: "Carpet" },
+  ];
+
+  const isNeededOptions = [
+    { value: "", label: "Select..." },
+    { value: "yes", label: "Yes" },
+    { value: "no", label: "No" },
+  ];
+
+  // const handleChange = (value: any) => {
+  //   setSelectedValue(value);
+  //   console.log(`Selected value is: ${value}`);
+  // };
 
   return (
     <form
@@ -147,6 +172,7 @@ export function Form() {
             type="number"
             className="border border-zinc-200 shadow-sm rounded h-10"
             placeholder="Event Name"
+            min={0}
             {...register("quantityCounter")}
           />
           {errors.quantityCounter && (
@@ -210,17 +236,14 @@ export function Form() {
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="typeFloor">Type Floor</label>
-          <Select {...register("typeFloor")} >
-              <SelectTrigger className="border border-zinc-200 shadow-sm rounded h-10">
-                <SelectValue placeholder="Select a option"/>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="vinyl">Vinyl</SelectItem>
-                  <SelectItem value="carpete">Carpete</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+          <select
+            {...register("typeFloor")}
+            className="border border-zinc-200 shadow-sm rounded h-10 focus:outline-none pl-3"
+          >
+            <option value="">Select...</option>
+            <option value="vinyl">vinyl</option>
+            <option value="carpet">carpet</option>
+          </select>
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="quantityTV">Quantity TV</label>
@@ -234,17 +257,14 @@ export function Form() {
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="isNeededGraph">Is Needed Graph</label>
-            <Select>
-              <SelectTrigger {...register("isNeededGraph")} className="border border-zinc-200 shadow-sm rounded h-10">
-                <SelectValue placeholder="Select a option"/>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="yes">Yes</SelectItem>
-                  <SelectItem value="no">No</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+          <select
+            {...register("isNeededGraph")}
+            className="border border-zinc-200 shadow-sm rounded h-10 focus:outline-none pl-3"
+          >
+            <option value="">Select...</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="images">Images</label>
