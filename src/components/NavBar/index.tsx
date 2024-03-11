@@ -14,16 +14,16 @@ export function Navbar({ }) {
   const t = useTranslations("NavBar")
 
   return (
-    <div className="fixed top-0 right-0 left-0 z-10 bg-[#37517e] bg-opacity-90">
+    <div className="fixed top-0 right-0 left-0 z-10 bg-[#283a5ae6] bg-opacity-90">
       <Popover className="container text-white flex items-center justify-between py-3 md:gap-3">
-        <h1 className="font-medium m-0 uppercase md:text-2xl lg:text-3xl">
-          <Link className="text-white" href="#">
-            {/* <Image
+        <h1 className="font-medium m-0 uppercase text-lg lg:text-3xl">
+          <Link className=" flex items-center justify-center gap-3 text-white" href="#">
+            <Image
               alt="logo NewConceptExhibition"
-              src="/img/favicon-16x16.png"
+              src="/img/logo-new-concept-white.png"
               width={30}
               height={30}
-            /> */}
+            />
             NewConceptExhibiton
           </Link>
         </h1>

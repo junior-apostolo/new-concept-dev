@@ -23,5 +23,3 @@ const nextConfig = {
 };
  
 module.exports = withNextIntl(nextConfig);
-
-// https://i.imgur.com/Rqubs21.jpg)

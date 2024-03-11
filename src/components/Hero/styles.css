@@ -4,25 +4,26 @@
 #hero {
     width: 100%;
     height: 80vh;
-    background: #37517e;
+    background: linear-gradient(rgba(40, 58, 90, 0.5), rgba(40, 58, 90, 0.9)), url("/img/portfolio/gallery/IMG_BG.jpg") fixed center center;
   }
-  
+
+  // #37517e
   #hero .container {
     padding-top: 72px;
   }
   
   #hero h1 {
     margin: 0 0 10px 0;
-    font-size: 48px;
+    font-size: 50px;
     font-weight: 700;
     line-height: 56px;
     color: #fff;
   }
   
   #hero h2 {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 50px;
-    font-size: 24px;
+    font-size: 28px;
   }
   
   #hero .btn-get-started {

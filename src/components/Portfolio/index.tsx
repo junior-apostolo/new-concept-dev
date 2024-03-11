@@ -11,10 +11,11 @@ const myHeaders = new Headers();
 myHeaders.append("Authorization", "Client-ID accdfd12b9814d5");
 
 async function getImages(): Promise<Images[]> {
-  const response = await fetch("https://api.imgur.com/3/album/9Z64ZD9/images", {
+  const response = await fetch("https://api.imgur.com/3/album/ApbzDzx/images", {
     method: "GET",
     headers: myHeaders,
     redirect: "follow",
+    cache: "no-store",
   });
 
   const data = await response.json();

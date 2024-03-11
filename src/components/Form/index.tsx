@@ -46,7 +46,7 @@ const budgetFormSchema = z.object({
   quantityTV: z.coerce.number().nonnegative(),
   typeFloor: z.string().optional(),
   isNeededGraph: z.enum(["yes", "no"]).optional(),
-  images: z.instanceof(FileList),
+  // images: z.instanceof(FileList),
 });
 
 type BudgetFormSchema = z.infer<typeof budgetFormSchema>;
@@ -93,7 +93,7 @@ export function Form() {
     try {
       console.log("Objeto", data);
       console.log("Valor ao vivo", watch("typeFloor"));
-      const images = await convertToBase64(data.images);
+      // const images = await convertToBase64(data.images);
     } catch (err) {
       console.log(err);
     }
@@ -266,7 +266,7 @@ export function Form() {
             <option value="no">No</option>
           </select>
         </div>
-        <div className="flex flex-col gap-1">
+        {/* <div className="flex flex-col gap-1">
           <label htmlFor="images">Images</label>
           <Input
             type="file"
@@ -276,7 +276,7 @@ export function Form() {
             placeholder="Event Name"
             {...register("images")}
           />
-        </div>
+        </div> */}
       </div>
 
       <Button

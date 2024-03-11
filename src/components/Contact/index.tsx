@@ -31,7 +31,7 @@ export function Contact() {
               <div className="email">
                 <i className="bi bi-envelope"></i>
                 <h4 id="email">Email:</h4>
-                <p>newconceptexhibit@gmail.com</p>
+                <p>info@newconceptexhibit.com</p>
               </div>
 
               <div className="phone">

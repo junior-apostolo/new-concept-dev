@@ -17,12 +17,12 @@ export function Footer() {
                 <br />
                 <strong>Phone:</strong> (561) 260-1263
                 <br />
-                <strong>Email:</strong> newconceptexhibit@gmail.com
+                <strong>Email:</strong> info@newconceptexhibit.com
                 <br />
               </p>
             </div>
 
-            <div className="col-lg-3 col-md-6 footer-links">
+            {/* <div className="col-lg-3 col-md-6 footer-links">
               <h4>Useful Links</h4>
               <ul>
                 <li>
@@ -45,12 +45,12 @@ export function Footer() {
                   <Link href="#">Privacy policy</Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             <div className="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
-                <li>
+                {/* <li>
                   <i className="bx bx-chevron-right"></i>{" "}
                   <Link href="#">Web Design</Link>
                 </li>
@@ -69,15 +69,14 @@ export function Footer() {
                 <li>
                   <i className="bx bx-chevron-right"></i>
                   <Link href="#">Graphic Design</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
             <div className="col-lg-3 col-md-6 footer-links">
               <h4>Our Social Networks</h4>
               <p>
-                Cras fermentum odio eu feugiat lide par naso tierra videa magna
-                derita valies
+                Confira nossas redes socias e fique por dentro do nosso trabalho
               </p>
               <div className="social-links mt-3">
                 <Link href="#" className="twitter">
@@ -92,12 +91,12 @@ export function Footer() {
                 >
                   <i className="bx bxl-instagram"></i>
                 </Link>
-                <Link href="#" className="google-plus">
+                {/* <Link href="#" className="google-plus">
                   <i className="bx bxl-skype"></i>
                 </Link>
                 <Link href="#" className="linkedin">
                   <i className="bx bxl-linkedin"></i>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
